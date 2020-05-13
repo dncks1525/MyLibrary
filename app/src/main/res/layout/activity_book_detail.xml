@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/textStartGuidelineHor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.48" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/textEndGuidelineHor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.98" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/textStartGuidelineVer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.04" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/textEndGuidelineVer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.96" />
+
+    <ImageView
+        android:id="@+id/bookmarkImg"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/ic_bookmark_border_black_24dp"
+        app:layout_constraintBottom_toBottomOf="@id/textStartGuidelineHor"
+        app:layout_constraintEnd_toEndOf="@id/textEndGuidelineVer" />
+
+    <ImageView
+        android:id="@+id/thumbnailImg"
+        android:layout_width="250dp"
+        android:layout_height="280dp"
+        android:layout_marginTop="5dp"
+        android:transitionName="@string/transition_name_thumbnail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        tools:background="@drawable/book_sample" />
+
+    <TextView
+        android:id="@+id/titleTxt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/textEndGuidelineVer"
+        app:layout_constraintStart_toStartOf="@id/textStartGuidelineVer"
+        app:layout_constraintTop_toTopOf="@id/textStartGuidelineHor"
+        tools:text="@string/sample" />
+
+    <TextView
+        android:id="@+id/subtitleTxt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@id/textEndGuidelineVer"
+        app:layout_constraintStart_toStartOf="@id/textStartGuidelineVer"
+        app:layout_constraintTop_toBottomOf="@id/titleTxt"
+        tools:text="@string/sample" />
+
+    <TextView
+        android:id="@+id/authors"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/book_author"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/textStartGuidelineVer"
+        app:layout_constraintTop_toBottomOf="@id/subtitleTxt" />
+
+    <TextView
+        android:id="@+id/authorsTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        app:layout_constraintStart_toEndOf="@id/authors"
+        app:layout_constraintTop_toTopOf="@id/authors"
+        tools:text="@string/sample" />
+
+    <TextView
+        android:id="@+id/publisher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/book_publisher"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/textStartGuidelineVer"
+        app:layout_constraintTop_toBottomOf="@id/authors" />
+
+    <TextView
+        android:id="@+id/publisherTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        app:layout_constraintStart_toEndOf="@id/publisher"
+        app:layout_constraintTop_toTopOf="@id/publisher"
+        tools:text="@string/sample" />
+
+    <TextView
+        android:id="@+id/lang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/book_language"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/textStartGuidelineVer"
+        app:layout_constraintTop_toBottomOf="@id/publisher" />
+
+    <TextView
+        android:id="@+id/langTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        app:layout_constraintStart_toEndOf="@id/lang"
+        app:layout_constraintTop_toTopOf="@id/lang"
+        tools:text="@string/sample" />
+
+    <TextView
+        android:id="@+id/div2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:text="@string/book_divider"
+        app:layout_constraintStart_toEndOf="@id/langTxt"
+        app:layout_constraintTop_toTopOf="@id/lang" />
+
+    <TextView
+        android:id="@+id/year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:text="@string/book_year"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/div2"
+        app:layout_constraintTop_toTopOf="@id/lang" />
+
+    <TextView
+        android:id="@+id/yearTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        app:layout_constraintStart_toEndOf="@id/year"
+        app:layout_constraintTop_toTopOf="@id/lang"
+        tools:text="@string/sample" />
+
+    <TextView
+        android:id="@+id/div3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:text="@string/book_divider"
+        app:layout_constraintStart_toEndOf="@id/yearTxt"
+        app:layout_constraintTop_toTopOf="@id/lang" />
+
+    <TextView
+        android:id="@+id/rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:text="@string/book_rating"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/div3"
+        app:layout_constraintTop_toTopOf="@id/lang" />
+
+    <TextView
+        android:id="@+id/ratingTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        app:layout_constraintStart_toEndOf="@id/rating"
+        app:layout_constraintTop_toTopOf="@id/lang"
+        tools:text="@string/sample" />
+
+    <TextView
+        android:id="@+id/page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/book_page"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/textStartGuidelineVer"
+        app:layout_constraintTop_toBottomOf="@id/lang" />
+
+    <TextView
+        android:id="@+id/pageTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        app:layout_constraintStart_toEndOf="@id/page"
+        app:layout_constraintTop_toTopOf="@id/page"
+        tools:text="@string/sample" />
+
+    <TextView
+        android:id="@+id/div4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:text="@string/book_divider"
+        app:layout_constraintStart_toEndOf="@id/pageTxt"
+        app:layout_constraintTop_toTopOf="@id/page" />
+
+    <TextView
+        android:id="@+id/isbn10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:text="@string/book_isbn10"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/div4"
+        app:layout_constraintTop_toTopOf="@id/page" />
+
+    <TextView
+        android:id="@+id/isbn10Txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        app:layout_constraintStart_toEndOf="@id/isbn10"
+        app:layout_constraintTop_toTopOf="@id/isbn10"
+        tools:text="@string/sample" />
+
+    <TextView
+        android:id="@+id/div5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:text="@string/book_divider"
+        app:layout_constraintStart_toEndOf="@id/isbn10Txt"
+        app:layout_constraintTop_toTopOf="@id/isbn10" />
+
+    <TextView
+        android:id="@+id/isbn13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:text="@string/book_isbn13"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/div5"
+        app:layout_constraintTop_toTopOf="@id/isbn10" />
+
+    <TextView
+        android:id="@+id/isbn13Txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        app:layout_constraintStart_toEndOf="@id/isbn13"
+        app:layout_constraintTop_toTopOf="@id/isbn10"
+        tools:text="@string/sample" />
+
+    <TextView
+        android:id="@+id/url"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/book_url"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/textStartGuidelineVer"
+        app:layout_constraintTop_toBottomOf="@id/page" />
+
+    <TextView
+        android:id="@+id/urlTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        app:layout_constraintStart_toEndOf="@id/url"
+        app:layout_constraintTop_toTopOf="@id/url"
+        tools:text="@string/sample" />
+
+    <TextView
+        android:id="@+id/descTxt"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:lineSpacingMultiplier="1.2"
+        app:layout_constraintBottom_toBottomOf="@id/textEndGuidelineHor"
+        app:layout_constraintEnd_toEndOf="@id/textEndGuidelineVer"
+        app:layout_constraintStart_toStartOf="@id/textStartGuidelineVer"
+        app:layout_constraintTop_toBottomOf="@id/url"
+        tools:text="@string/sample" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
