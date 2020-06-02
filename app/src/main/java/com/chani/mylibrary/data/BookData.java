@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 import java.util.List;
 
-public class BookDatabase {
+public class BookData {
     private int error;
     private int total;
     private int page;
@@ -69,7 +69,7 @@ public class BookDatabase {
         }
     }
 
-    public static class BookDetails implements Parcelable {
+    public static class BookDetail implements Parcelable {
         private int error;
         private String title;
         private String subtitle;
@@ -87,7 +87,7 @@ public class BookDatabase {
         private String url;
         private String memo;
 
-        protected BookDetails(Parcel in) {
+        protected BookDetail(Parcel in) {
             this.error = in.readInt();
             this.title = in.readString();
             this.subtitle = in.readString();
@@ -131,15 +131,15 @@ public class BookDatabase {
             dest.writeString(this.memo);
         }
 
-        public static final Creator<BookDetails> CREATOR = new Creator<BookDetails>() {
+        public static final Creator<BookDetail> CREATOR = new Creator<BookDetail>() {
             @Override
-            public BookDetails createFromParcel(Parcel source) {
-                return new BookDetails(source);
+            public BookDetail createFromParcel(Parcel source) {
+                return new BookDetail(source);
             }
 
             @Override
-            public BookDetails[] newArray(int size) {
-                return new BookDetails[size];
+            public BookDetail[] newArray(int size) {
+                return new BookDetail[size];
             }
         };
 

@@ -2,5 +2,5 @@
 <searchable xmlns:android="http://schemas.android.com/apk/res/android"
     android:hint="@string/appbar_item_search_hint"
     android:label="@string/app_name"
-    android:searchSuggestAuthority="com.chani.SearchHistory"
+    android:searchSuggestAuthority="com.chani.mylibrary.SearchHistoryProvider"
     android:searchSuggestSelection=" ?"/>

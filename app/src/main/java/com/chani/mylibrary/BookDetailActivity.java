@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.chani.mylibrary.data.BookDatabase;
+import com.chani.mylibrary.data.BookData;
 import com.chani.mylibrary.databinding.ActivityBookDetailBinding;
 
 public class BookDetailActivity extends AppCompatActivity {
@@ -23,8 +23,8 @@ public class BookDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent i = getIntent();
-        BookDatabase.BookDetails detail = i.getParcelableExtra(LibraryConst.KEY_THUMBNAIL);
-        mIsBookmarked = i.getBooleanExtra(LibraryConst.KEY_BOOKMARK, false);
+        BookData.BookDetail detail = i.getParcelableExtra(MyLibraryConst.KEY_THUMBNAIL);
+        mIsBookmarked = i.getBooleanExtra(MyLibraryConst.KEY_BOOKMARK, false);
         if (detail != null) {
             mBinding.titleTxt.setText(detail.getTitle());
             mBinding.subtitleTxt.setText(detail.getSubtitle());
@@ -56,8 +56,8 @@ public class BookDetailActivity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         Intent i = new Intent();
-        i.putExtra(LibraryConst.KEY_BOOKMARK, mIsBookmarked);
-        i.putExtra(LibraryConst.KEY_ISBN13, mBinding.isbn13Txt.getText());
+        i.putExtra(MyLibraryConst.KEY_BOOKMARK, mIsBookmarked);
+        i.putExtra(MyLibraryConst.KEY_ISBN13, mBinding.isbn13Txt.getText());
         setResult(1, i);
         supportFinishAfterTransition();
         return super.onSupportNavigateUp();

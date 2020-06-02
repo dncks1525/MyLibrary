@@ -27,8 +27,8 @@
         <activity android:name=".BookDetailActivity" />
 
         <provider
-            android:authorities="com.chani.SearchHistory"
-            android:name=".utils.SearchHistory"
+            android:authorities="com.chani.mylibrary.SearchHistoryProvider"
+            android:name=".SearchHistoryProvider"
             android:exported="false" />
     </application>
 

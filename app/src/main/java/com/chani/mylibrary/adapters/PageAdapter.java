@@ -9,22 +9,24 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chani.mylibrary.R;
-import com.chani.mylibrary.data.BookDatabase;
-import com.chani.mylibrary.data.BookDatabase.Book;
-import com.chani.mylibrary.data.PageInfo;
+import com.chani.mylibrary.data.BookData.Book;
+import com.chani.mylibrary.data.PageItem;
 import com.chani.mylibrary.databinding.ItemPageBinding;
 
 import java.util.List;
 
+import static com.chani.mylibrary.data.PageItem.*;
+
 public class PageAdapter extends RecyclerView.Adapter<PageAdapter.PageHolder> {
-    public static final int SORT_BY_TITLE_ASC = 2;
-    public static final int SORT_BY_TITLE_DSC = 4;
-    public static final int SORT_BY_PRICE_ASC = 8;
-    public static final int SORT_BY_PRICE_DSC = 16;
+    public static final int REQUEST_LOAD_MORE = 1;
+    public static final int REQUEST_SORT_BY_TITLE_ASC = 2;
+    public static final int REQUEST_SORT_BY_TITLE_DSC = 4;
+    public static final int REQUEST_SORT_BY_PRICE_ASC = 8;
+    public static final int REQUEST_SORT_BY_PRICE_DSC = 16;
 
-    private List<PageInfo> mItems;
+    private List<PageItem> mItems;
 
-    public PageAdapter(List<PageInfo> items) {
+    public PageAdapter(List<PageItem> items) {
         this.mItems = items;
     }
 
@@ -45,14 +47,7 @@ public class PageAdapter extends RecyclerView.Adapter<PageAdapter.PageHolder> {
         if (payloads.isEmpty()) {
             super.onBindViewHolder(holder, position, payloads);
         } else {
-            Object object = payloads.get(0);
-            if (object == null) {
-                holder.update(null);
-            } else if (object instanceof List) {
-                holder.update((List<Book>) object);
-            } else if (object instanceof Integer) {
-                holder.sortBy((Integer) object);
-            }
+            holder.request((int)payloads.get(0));
         }
     }
 
@@ -61,62 +56,39 @@ public class PageAdapter extends RecyclerView.Adapter<PageAdapter.PageHolder> {
         return (mItems != null) ? mItems.size() : 0;
     }
 
-    public void addBooks(int position, List<Book> bookList) {
-        notifyItemChanged(position, bookList);
-    }
-
-    public void clearBooks(int position) {
-        mItems.get(position).clearBook();
-        notifyItemChanged(position, null);
-    }
-
-    public void sortBy(int position, int sort) {
-        notifyItemChanged(position, sort);
+    public void request(int position, int what) {
+        notifyItemChanged(position, what);
     }
 
     public static class PageHolder extends RecyclerView.ViewHolder {
         private ItemPageBinding mBinding;
-        private boolean mIsLoading;
 
         public PageHolder(@NonNull View itemView) {
             super(itemView);
             mBinding = ItemPageBinding.bind(itemView);
         }
 
-        public void bind(PageInfo pageInfo) {
-            mIsLoading = false;
+        public void bind(PageItem pageItem) {
             mBinding.recycler.setLayoutManager(new GridLayoutManager(itemView.getContext(), 2));
             mBinding.recycler.setHasFixedSize(true);
             mBinding.recycler.setItemAnimator(null);
-            mBinding.recycler.setAdapter(new BookAdapter(pageInfo.getBookList(), pageInfo.getOnItemClickListener()));
+            mBinding.recycler.setAdapter(new BookAdapter(pageItem.getBookList(), pageItem.getOnItemClickListener()));
 
-            if (pageInfo.getOnScrollListener() != null) {
-                ScrollListener listener = new ScrollListener(pageInfo.getOnScrollListener());
+            if (pageItem.getOnScrollListener() != null) {
+                ScrollListener listener = new ScrollListener(pageItem.getOnScrollListener());
                 mBinding.recycler.clearOnScrollListeners();
                 mBinding.recycler.addOnScrollListener(listener);
             }
         }
 
-        public void update(List<Book> bookList) {
-            mIsLoading = false;
-            BookAdapter adapter = (BookAdapter) mBinding.recycler.getAdapter();
-            if (adapter != null) {
-                if (bookList == null) {
-                    adapter.clearItems();
-                } else {
-                    adapter.addItems(bookList);
-                }
+        public void request(int what) {
+            if (mBinding.recycler.getAdapter() != null) {
+                BookAdapter adapter = (BookAdapter) mBinding.recycler.getAdapter();
+                adapter.request(what);
             }
         }
 
-        public void sortBy(int sort) {
-            BookAdapter adapter = (BookAdapter) mBinding.recycler.getAdapter();
-            if (adapter != null) {
-                adapter.sortBy(sort);
-            }
-        }
-
-        public class ScrollListener extends RecyclerView.OnScrollListener {
+        public static class ScrollListener extends RecyclerView.OnScrollListener {
             private OnScrollListener mOnScrollListener;
 
             public ScrollListener(OnScrollListener listener) {
@@ -126,20 +98,9 @@ public class PageAdapter extends RecyclerView.Adapter<PageAdapter.PageHolder> {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 if (!recyclerView.canScrollVertically(1)) {
-                    if (!mIsLoading && mOnScrollListener != null) {
-                        mIsLoading = true;
-                        mOnScrollListener.onLoadMoreIfExists();
-                    }
+                    mOnScrollListener.onLoadMoreIfExists();
                 }
             }
         }
-    }
-
-    public interface OnScrollListener {
-        void onLoadMoreIfExists();
-    }
-
-    public interface OnItemClickListener {
-        void onItemClick(View view, Book book);
     }
 }
